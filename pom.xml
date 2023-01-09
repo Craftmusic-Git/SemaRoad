@@ -67,7 +67,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                fr.uha.ensisa.divemiller.semaroad/fr.uha.ensisa.divemiller.semaroad.HelloApplication
+                                fr.uha.ensisa.divemiller.semaroad/fr.uha.ensisa.divemiller.semaroad.SemaRoadApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
