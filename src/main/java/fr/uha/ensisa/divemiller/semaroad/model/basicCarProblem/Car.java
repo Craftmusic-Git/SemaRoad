@@ -9,21 +9,23 @@ public class Car extends BasicCarProblem {
     protected LanePosition position;
     private Integer id;
 
+    private Semaphore st;
+    private Semaphore sf;
+
     public Car(Integer id, LanePosition position, Semaphore sf1, Semaphore sf2, Semaphore st1, Semaphore st2) {
 
         this.id = id;
         this.position = position;
 
-        this.sf1 = sf1;
-        this.sf2 = sf2;
-
-        this.st1 = st1;
-        this.st2 = st2;
-
         if (this.position.equals(LanePosition.LEFT)) {
             BasicCarProblem.left += 1;
+            this.sf = sf1;
+            this.st = st1;
+
         } else if (this.position.equals(LanePosition.BOTTOM)) {
             BasicCarProblem.bottom += 1;
+            this.sf = sf2;
+            this.st = st2;
         }
 
     }
@@ -34,26 +36,13 @@ public class Car extends BasicCarProblem {
 
             sleep(rand.nextInt(9 * 1000));
 
-            if (this.position.equals(LanePosition.LEFT)) {
-                this.st1.acquire();
-                this.sf1.acquire();
+            this.st.acquire();
+            this.sf.acquire();
 
-                this.avance();
+            this.avance();
 
-                this.sf1.release();
-                this.st1.release();
-            }
-
-            else if (this.position.equals(LanePosition.BOTTOM)) {
-
-                this.st2.acquire();
-                this.sf2.acquire();
-
-                this.avance();
-
-                this.sf2.release();
-                this.st2.release();
-            }
+            this.sf.release();
+            this.st.release();
         }
 
         catch (InterruptedException e) {
