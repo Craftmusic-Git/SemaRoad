@@ -4,7 +4,7 @@ import fr.uha.ensisa.divemiller.semaroad.graphics.view.LightPosition;
 
 public class EventManager {
 
-    EventManager em;
+    private static EventManager em;
 
     private LightPosition lightPosition;
 
@@ -12,7 +12,7 @@ public class EventManager {
 
     }
 
-    public EventManager getEventManager() {
+    public static EventManager getEventManager() {
         if (em != null) return em;
         em = new EventManager();
         return em;
