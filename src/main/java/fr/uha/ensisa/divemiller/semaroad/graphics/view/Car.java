@@ -21,7 +21,7 @@ public class Car implements DynamicGraphicObject {
         position = new Point2D(256,256);
         this.lane = lane;
         car = new Image("file:src/main/resources/fr/uha/ensisa/divemiller/semaroad/car.png");
-        status = CarStatus.FORWARD;
+        status = CarStatus.WAITING;
     }
 
     public Car(Integer id, LanePosition lane,double angle, long x, long y) {
@@ -29,26 +29,13 @@ public class Car implements DynamicGraphicObject {
         this.lane = lane;
         this.angle = angle;
         car = new Image("file:src/main/resources/fr/uha/ensisa/divemiller/semaroad/car.png");
-        status = CarStatus.FORWARD;
+        status = CarStatus.WAITING;
     }
 
     public void forward(double dist) {
-        if (status == CarStatus.FORWARD) {
-            switch (lane) {
-                case TOP -> {
-                    position = position.add(0,dist);
-                }
-                case RIGHT -> {
-                    position = position.add(-dist,0);
-                }
-                case BOTTOM -> {
-                    position = position.add(0,-dist);
-                }
-                case LEFT -> {
-                    position = position.add(dist,0);
-                }
-            }
-        }
+        System.out.println("Position : " + position + " NextPosition : " + nextPosition);
+        Point2D AB = nextPosition.subtract(position).normalize();
+        position = new Point2D(position.getX() + dist * AB.getX(),  position.getY() + dist * AB.getY());
     }
 
     @Override

@@ -34,12 +34,12 @@ public class ModelLaucher implements Runnable {
         TrafficLight feu = new TrafficLight(sf1, sf2);
         feu.start();
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             Car car = new Car(i, LanePosition.LEFT, sf1, sf2, st1, st2);
             car.start();
         }
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             Car car = new Car(i + 5, LanePosition.BOTTOM, sf1, sf2, st1, st2);
             car.start();
         }

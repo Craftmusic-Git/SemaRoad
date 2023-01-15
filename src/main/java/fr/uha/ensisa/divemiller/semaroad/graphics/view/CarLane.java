@@ -45,17 +45,7 @@ public class CarLane implements DynamicGraphicObject {
    }
 
    public void calcNextPosition() {
-        for (int i = 0; i < queue.size(); i++) {
-            if (queue.getFirst().getStatus() == CarStatus.MIDDLE) {
-                queue.getFirst().setNextPosition(objective);
-                queue.removeFirst();
-            }
-            if (queue.get(i).getPosition().distance(places.get(i)) < 0.3) {
-                queue.get(i).setStatus(CarStatus.STOP);
-            } else {
-                queue.get(i).setStatus(CarStatus.FORWARD);
-            }
-        }
+
    }
 
     @Override
@@ -68,7 +58,7 @@ public class CarLane implements DynamicGraphicObject {
     public void addCar(Car car) {
         queue.add(car);
         cars.add(car);
-        car.setStatus(CarStatus.FORWARD);
+        car.setStatus(CarStatus.WAITING);
     }
 
     public ArrayList<Car> getCars() {

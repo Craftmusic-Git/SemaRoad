@@ -14,17 +14,12 @@ public class DynamicObjects extends AnimationTimer implements DynamicGraphicObje
 
     GraphicsContext gc;
     long startTime;
-    ArrayList<CarLane> lanes;
+    Controller controller;
 
     public DynamicObjects(GraphicsContext gc) {
         this.gc = gc;
         startTime = System.nanoTime();
-        lanes = new ArrayList<>();
-
-        lanes.add(new CarLane(LanePosition.TOP));
-        lanes.add(new CarLane(LanePosition.RIGHT));
-        lanes.add(new CarLane(LanePosition.BOTTOM));
-        lanes.add(new CarLane(LanePosition.LEFT));
+        controller = new Controller();
     }
 
     @Override
@@ -37,29 +32,17 @@ public class DynamicObjects extends AnimationTimer implements DynamicGraphicObje
         TrafficLight tl = new TrafficLight(em.getLightPosition());
         tl.show(gc);
 
-        for (Car c : em.getCars()) {
-            switch (c.getLane()) {
-                case TOP -> {
-                    lanes.get(0).addCar(c);
-                }
-                case RIGHT -> {
-                    lanes.get(1).addCar(c);
-                }
-                case BOTTOM -> {
-                    lanes.get(2).addCar(c);
-                }
-                case LEFT -> {
-                    lanes.get(3).addCar(c);
-                }
-            }
-        }
+        em.getCars().stream().forEach(c -> controller.addCarInQueue(c));
         em.resetEmCars();
 
-        lanes.stream().forEach(carLane -> carLane.getCars().forEach(car -> {
-            if (car.getStatus() == CarStatus.FORWARD || car.getStatus() == CarStatus.MIDDLE)
-                car.forward(.128 * time);
-            car.show(gc);
-        }));
+        controller.CalcNextPosition();
+
+
+        //car.forward(.128 * time);
+        controller.getCars().forEach(c -> {
+            c.forward(.128 * time);
+            c.show(gc);
+        });
     }
 
     @Override
