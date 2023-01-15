@@ -1,12 +1,17 @@
-package fr.uha.ensisa.divemiller.semaroad.layout;
+package fr.uha.ensisa.divemiller.semaroad.graphics.view;
 
+import fr.uha.ensisa.divemiller.semaroad.graphics.core.DynamicGraphicObject;
+import fr.uha.ensisa.divemiller.semaroad.graphics.core.FixedGraphicObject;
 import javafx.scene.Group;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 
-public class Roads implements GraphicObject {
+import static fr.uha.ensisa.divemiller.semaroad.graphics.core.GraphicUtils.drawRotatedImage;
+
+public class Roads implements FixedGraphicObject, DynamicGraphicObject {
 
     Image road;
 
@@ -118,5 +123,42 @@ public class Roads implements GraphicObject {
         rep.getChildren().addAll(grounds);
 
         return rep;
+    }
+
+    @Override
+    public void show(GraphicsContext gc) {
+        for (double i = 0; i < 10 ; i++) {
+            for (double j = 0; j < 10 ; j++ ) {
+                gc.drawImage(ground, i*64, j*64);
+            }
+        }
+
+        // Top
+        for (double i = 0; i < 4; i++) {
+            drawRotatedImage(gc, road, 0, 256, i * 64);
+            drawRotatedImage(gc, road, 180, 320, i * 64);
+        }
+        drawRotatedImage(gc, roadCorner, 0, 256, 256);
+
+        // Bottom
+        for (double i = 0; i < 4; i++) {
+            drawRotatedImage(gc, road, 0, 256, i * 64 + 384);
+            drawRotatedImage(gc, road, 180, 320, i * 64 + 384);
+        }
+        drawRotatedImage(gc, roadCorner, 180, 320, 320);
+
+        // Left
+        for (double i = 0; i < 4; i++) {
+            drawRotatedImage(gc, road, 90, i * 64, 256);
+            drawRotatedImage(gc, road, 270, i * 64, 320);
+        }
+        drawRotatedImage(gc, roadCorner, 90, 320, 256);
+
+        // Right
+        for (double i = 0; i < 4; i++) {
+            drawRotatedImage(gc, road, 90, i * 64 + 384, 256);
+            drawRotatedImage(gc, road, 270, i * 64 + 384, 320);
+        }
+        drawRotatedImage(gc, roadCorner, 270, 256, 320);
     }
 }

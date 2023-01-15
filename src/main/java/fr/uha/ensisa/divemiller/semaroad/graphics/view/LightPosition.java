@@ -1,4 +1,4 @@
-package fr.uha.ensisa.divemiller.semaroad.layout;
+package fr.uha.ensisa.divemiller.semaroad.graphics.view;
 
 public enum LightPosition {
     HORIZONTAL,
