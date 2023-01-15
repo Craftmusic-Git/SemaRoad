@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 
-public class Roads {
+public class Roads implements GraphicObject {
 
     Image road;
 
@@ -20,7 +20,7 @@ public class Roads {
         roadCorner = new Image("file:src/main/resources/fr/uha/ensisa/divemiller/semaroad/road2.jpg");
     }
 
-    public Group getLayout() {
+    public Group show() {
         ArrayList<ImageView> grounds = new ArrayList<>();
 
         for (double i = 0; i < 10 ; i++) {

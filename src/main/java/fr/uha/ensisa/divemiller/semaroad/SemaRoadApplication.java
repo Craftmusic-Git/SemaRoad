@@ -1,5 +1,6 @@
 package fr.uha.ensisa.divemiller.semaroad;
 
+import fr.uha.ensisa.divemiller.semaroad.layout.FixedObject;
 import fr.uha.ensisa.divemiller.semaroad.layout.Roads;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -10,8 +11,8 @@ import java.io.IOException;
 public class SemaRoadApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Roads roads = new Roads();
-        Scene scene = new Scene(roads.getLayout(), 640, 640);
+        FixedObject layout = new FixedObject();
+        Scene scene = new Scene(layout.show(), 640, 640);
 
 
         stage.setScene(scene);
