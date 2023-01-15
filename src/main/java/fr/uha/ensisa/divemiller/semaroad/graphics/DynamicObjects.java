@@ -24,7 +24,9 @@ public class DynamicObjects extends AnimationTimer implements DynamicGraphicObje
     public void handle(long l) {
         Roads layout = new Roads();
         layout.show(gc);
-        double time = (l - startTime) / 100000000.0;
+
+        double time = (l - startTime) / 1000000.0;
+        Double vitesse = .128 * time;
 
         EventManager em = EventManager.getEventManager();
         TrafficLight tl = new TrafficLight(em.getLightPosition());
@@ -37,9 +39,15 @@ public class DynamicObjects extends AnimationTimer implements DynamicGraphicObje
 
         controller.CalcNextPosition();
         controller.getCars().forEach(c -> {
-            c.forward(.128 * time);
+            if (!c.aTraverse() && c.getStatus().equals(CarStatus.MIDDLE)) {
+                controller.traverser(c.getId());
+                c.setTraverse(true);
+            }
+            c.forward(vitesse);
             c.show(gc);
         });
+
+        this.startTime = System.nanoTime();
     }
 
     @Override
@@ -48,5 +56,4 @@ public class DynamicObjects extends AnimationTimer implements DynamicGraphicObje
         lights.show(gc);
     }
 
-    // car.forward(.128 * time);
 }

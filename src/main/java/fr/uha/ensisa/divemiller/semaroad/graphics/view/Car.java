@@ -19,23 +19,21 @@ public class Car implements DynamicGraphicObject {
     CarStatus status;
     Point2D nextPosition;
 
-    private Semaphore pret;
+    private Boolean traverse;
 
-    public Car(Integer id, LanePosition lane) {
-        position = new Point2D(256, 256);
-        this.lane = lane;
-        car = new Image("file:src/main/resources/fr/uha/ensisa/divemiller/semaroad/car.png");
-        status = CarStatus.WAITING;
-    }
+    private Semaphore pret;
 
     public Car(Integer id, LanePosition lane, double angle, long x, long y, Semaphore pret) {
         position = new Point2D(x, y);
         this.lane = lane;
         this.angle = angle;
-        this.pret = pret;
+
         this.id = id; // MICHEL !! les IDs c'est IMPORTANT !
         car = new Image("file:src/main/resources/fr/uha/ensisa/divemiller/semaroad/car.png");
         status = CarStatus.WAITING;
+
+        this.pret = pret;
+        this.traverse = false;
     }
 
     public void forward(double distance) {
@@ -45,8 +43,9 @@ public class Car implements DynamicGraphicObject {
                 switch (lane) {
                     case LEFT:
                         if (position.getX() > nextPosition.getX()) {
-                            if (!arrivedEndPosition)
+                            if (nextPosition.getX() == 192) {
                                 this.releaseArrivedEndPosition();
+                            }
                             arrivedEndPosition = true;
                         }
                         break;
@@ -55,7 +54,13 @@ public class Car implements DynamicGraphicObject {
                 }
                 break;
             case MIDDLE:
-                System.out.println("MIDDLE");
+                if (position.getX() >= 384) {
+                    if (!arrivedEndPosition)
+                        this.releaseArrivedEndPosition(); // Il faudrait utiliser un autre semaphore ici je pense
+                    arrivedEndPosition = true;
+                }
+                break;
+
             default:
                 break;
         }
@@ -120,4 +125,11 @@ public class Car implements DynamicGraphicObject {
         }
     }
 
+    public boolean aTraverse() {
+        return this.traverse;
+    }
+
+    public void setTraverse(boolean traverse) {
+        this.traverse = traverse;
+    }
 }

@@ -43,6 +43,8 @@ public class Car extends BasicCarProblem {
             this.st.acquire();
             this.sf.acquire();
 
+            System.out.println("je passe le feu");
+
             this.avance();
 
             this.sf.release();
@@ -54,7 +56,11 @@ public class Car extends BasicCarProblem {
         }
     }
 
-    private void avance() {
+    private void avance() throws InterruptedException {
         EventManager.getEventManager().forwardIntersection(id);
+        System.out.println("j'avance");
+
+        this.pret.acquire();
+        System.out.println("arrive");
     }
 }

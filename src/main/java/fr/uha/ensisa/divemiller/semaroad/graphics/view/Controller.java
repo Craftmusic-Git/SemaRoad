@@ -44,7 +44,7 @@ public class Controller {
         LeftFinalPos = new Point2D(720, 320);
         LeftWaitingPos = new ArrayList<>();
         for (int i = 0; i < 4; i++)
-            LeftWaitingPos.add(new Point2D(256 - i * 64, 320));
+            LeftWaitingPos.add(new Point2D(256 - (i + 1) * 64, 320));
 
         topQueue = new LinkedList<>();
         rightQueue = new LinkedList<>();
