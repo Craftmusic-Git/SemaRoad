@@ -7,7 +7,7 @@ public class BasicCarProblem extends Thread {
 
     protected final int WAIT = 1000;
     protected static Integer left = 0;
-    protected static Integer down = 0;
+    protected static Integer bottom = 0;
 
     Random rand = new Random();
 

@@ -2,12 +2,14 @@ package fr.uha.ensisa.divemiller.semaroad.model.basicCarProblem;
 
 import java.util.concurrent.Semaphore;
 
+import fr.uha.ensisa.divemiller.semaroad.graphics.view.LanePosition;
+
 public class Car extends BasicCarProblem {
 
-    protected Integer position;
+    protected LanePosition position;
     private Integer id;
 
-    public Car(Integer id, Integer position, Semaphore sf1, Semaphore sf2, Semaphore st1, Semaphore st2) {
+    public Car(Integer id, LanePosition position, Semaphore sf1, Semaphore sf2, Semaphore st1, Semaphore st2) {
 
         this.id = id;
         this.position = position;
@@ -18,10 +20,10 @@ public class Car extends BasicCarProblem {
         this.st1 = st1;
         this.st2 = st2;
 
-        if (this.position == 1) {
+        if (this.position.equals(LanePosition.LEFT)) {
             BasicCarProblem.left += 1;
-        } else if (this.position == 2) {
-            BasicCarProblem.down += 1;
+        } else if (this.position.equals(LanePosition.BOTTOM)) {
+            BasicCarProblem.bottom += 1;
         }
 
     }
@@ -32,7 +34,7 @@ public class Car extends BasicCarProblem {
 
             sleep(rand.nextInt(9 * 1000));
 
-            if (this.position == 1) {
+            if (this.position.equals(LanePosition.LEFT)) {
                 this.st1.acquire();
                 this.sf1.acquire();
 
@@ -42,7 +44,7 @@ public class Car extends BasicCarProblem {
                 this.st1.release();
             }
 
-            else if (this.position == 2) {
+            else if (this.position.equals(LanePosition.BOTTOM)) {
 
                 this.st2.acquire();
                 this.sf2.acquire();
@@ -61,14 +63,14 @@ public class Car extends BasicCarProblem {
 
     private void avance() {
 
-        if (this.position == 1) {
+        if (this.position.equals(LanePosition.LEFT)) {
             BasicCarProblem.left -= 1;
             System.out.println("BasicCarProblem.left = " + BasicCarProblem.left);
         }
 
-        else if (this.position == 2) {
-            BasicCarProblem.down -= 1;
-            System.out.println("BasicCarProblem.down = " + BasicCarProblem.down);
+        else if (this.position.equals(LanePosition.BOTTOM)) {
+            BasicCarProblem.bottom -= 1;
+            System.out.println("BasicCarProblem.down = " + BasicCarProblem.bottom);
 
         }
 
