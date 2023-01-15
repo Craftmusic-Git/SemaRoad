@@ -22,12 +22,9 @@ public class DynamicObjects extends AnimationTimer implements DynamicGraphicObje
     public void handle(long l) {
         Roads layout = new Roads();
         layout.show(gc);
-        double time = (l - startTime) / 50000000.0;
+        double time = (l - startTime) / 100000000.0;
 
-        Car car = new Car(640 - (long) time, 256);
-        Car car2 = new Car(256, ((long) (2 * time)));
-        car2.show(gc);
-        car.show(gc);
+
     }
 
     @Override
