@@ -30,15 +30,12 @@ public class Car extends BasicCarProblem {
             this.sf = sf2;
             this.st = st2;
         }
-
         EventManager.getEventManager().addCar(id, position);
     }
 
     @Override
     public void run() {
         try {
-
-            sleep(rand.nextInt(9 * 1000));
 
             this.st.acquire();
             this.sf.acquire();
@@ -58,12 +55,12 @@ public class Car extends BasicCarProblem {
 
         if (this.position.equals(LanePosition.LEFT)) {
             BasicCarProblem.left -= 1;
-            System.out.println("BasicCarProblem.left = " + BasicCarProblem.left);
+            // System.out.println("BasicCarProblem.left = " + BasicCarProblem.left);
         }
 
         else if (this.position.equals(LanePosition.BOTTOM)) {
             BasicCarProblem.bottom -= 1;
-            System.out.println("BasicCarProblem.down = " + BasicCarProblem.bottom);
+            // System.out.println("BasicCarProblem.down = " + BasicCarProblem.bottom);
 
         }
 

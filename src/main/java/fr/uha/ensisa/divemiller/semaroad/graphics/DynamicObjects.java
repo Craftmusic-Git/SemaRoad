@@ -6,10 +6,6 @@ import fr.uha.ensisa.divemiller.semaroad.viewmodel.EventManager;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.stream.Collectors;
-
 public class DynamicObjects extends AnimationTimer implements DynamicGraphicObject {
 
     GraphicsContext gc;
@@ -37,12 +33,7 @@ public class DynamicObjects extends AnimationTimer implements DynamicGraphicObje
 
         controller.CalcNextPosition();
 
-
-        //car.forward(.128 * time);
-        controller.getCars().forEach(c -> {
-            c.forward(.128 * time);
-            c.show(gc);
-        });
+        controller.getCars().forEach(c -> forward(c, .128 * time));
     }
 
     @Override
@@ -51,5 +42,33 @@ public class DynamicObjects extends AnimationTimer implements DynamicGraphicObje
         lights.show(gc);
     }
 
+    // car.forward(.128 * time);
+    private void forward(Car c, Double distance) {
+
+        switch (c.getStatus()) {
+            case WAITING:
+                switch (c.getLane()) {
+                    case LEFT:
+                        if (c.getPosition().getX() < c.getNextPosition().getX()) {
+                            c.forward(distance);
+                        } else
+                            c.setStatus(CarStatus.MIDDLE);
+                        break;
+
+                    default:
+                        break;
+                }
+                c.show(gc);
+                break;
+
+            case MIDDLE:
+                break;
+
+            case FORWARD:
+                break;
+            default:
+                break;
+        }
+    }
 
 }

@@ -21,7 +21,7 @@ public class SemaRoadApplication extends Application {
         startedModel.acquire();
 
         FixedObject layout = new FixedObject();
-        final Canvas canvas = new Canvas(640,640);
+        final Canvas canvas = new Canvas(640, 640);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         DynamicObjects dynamicObjects = new DynamicObjects(gc);
         dynamicObjects.show(gc);
@@ -36,7 +36,5 @@ public class SemaRoadApplication extends Application {
 
     public static void main(String[] args) {
         launch();
-
-
     }
 }

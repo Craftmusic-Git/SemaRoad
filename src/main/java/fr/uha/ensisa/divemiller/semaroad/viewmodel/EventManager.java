@@ -6,7 +6,6 @@ import fr.uha.ensisa.divemiller.semaroad.graphics.view.LanePosition;
 import fr.uha.ensisa.divemiller.semaroad.graphics.view.LightPosition;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class EventManager {
 
