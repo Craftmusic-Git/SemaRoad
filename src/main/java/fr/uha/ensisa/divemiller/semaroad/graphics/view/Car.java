@@ -43,15 +43,11 @@ public class Car implements DynamicGraphicObject {
             case WAITING:
                 switch (lane) {
                     case LEFT:
-                        if (position.getX() < nextPosition.getX()) {
-                        } else {
-                            if (!arrivedEndPosition) {
+                        if (position.getX() > nextPosition.getX())
+                            if (!arrivedEndPosition)
                                 this.releaseArrivedEndPosition();
-                            }
-                            arrivedEndPosition = true;
-                        }
+                        arrivedEndPosition = true;
                         break;
-
                     default:
                         break;
                 }
