@@ -30,6 +30,7 @@ public class DynamicObjects extends AnimationTimer implements DynamicGraphicObje
         tl.show(gc);
 
 
+
     }
 
     @Override

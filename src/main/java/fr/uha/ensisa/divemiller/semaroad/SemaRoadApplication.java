@@ -10,10 +10,16 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.concurrent.Semaphore;
 
 public class SemaRoadApplication extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, InterruptedException {
+        Semaphore startedModel = new Semaphore(0);
+        Thread logic = new Thread(new ModelLaucher(startedModel));
+        logic.start();
+        startedModel.acquire();
+
         FixedObject layout = new FixedObject();
         final Canvas canvas = new Canvas(640,640);
         GraphicsContext gc = canvas.getGraphicsContext2D();
