@@ -4,10 +4,6 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Roads {
@@ -56,7 +52,7 @@ public class Roads {
         for (double i = 0; i < 4; i ++) {
             ImageView im = new ImageView(roadCorner);
             im.setX(256 + i%2 * 64);
-            im.setY(256 + (i<2? 0 : 1) * 64);
+            im.setY(256 + (1<i && i<3? 0 : 1) * 64);
             im.setRotate(i*90);
             grounds.add(im);
         }
