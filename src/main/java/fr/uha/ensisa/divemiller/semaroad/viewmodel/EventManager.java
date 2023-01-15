@@ -13,7 +13,8 @@ public class EventManager {
     }
 
     public static EventManager getEventManager() {
-        if (em != null) return em;
+        if (em != null)
+            return em;
         em = new EventManager();
         return em;
     }
