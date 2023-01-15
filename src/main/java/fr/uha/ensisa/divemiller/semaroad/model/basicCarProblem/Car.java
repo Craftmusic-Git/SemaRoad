@@ -19,11 +19,13 @@ public class Car extends BasicCarProblem {
 
         if (this.position.equals(LanePosition.LEFT)) {
             BasicCarProblem.left += 1;
+            System.out.println("BasicCarProblem.left = " + BasicCarProblem.left);
             this.sf = sf1;
             this.st = st1;
 
         } else if (this.position.equals(LanePosition.BOTTOM)) {
             BasicCarProblem.bottom += 1;
+            System.out.println("BasicCarProblem.left = " + BasicCarProblem.bottom);
             this.sf = sf2;
             this.st = st2;
         }
