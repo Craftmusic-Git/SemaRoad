@@ -37,9 +37,34 @@ public class Car implements DynamicGraphicObject {
         status = CarStatus.WAITING;
     }
 
-    public void forward(double dist) {
-        Point2D AB = nextPosition.subtract(position).normalize();
-        position = new Point2D(position.getX() + dist * AB.getX(), position.getY() + dist * AB.getY());
+    public void forward(double distance) {
+        Boolean arrivedEndPosition = false;
+        switch (status) {
+            case WAITING:
+                switch (lane) {
+                    case LEFT:
+                        if (position.getX() < nextPosition.getX()) {
+                        } else {
+                            if (!arrivedEndPosition) {
+                                this.releaseArrivedEndPosition();
+                            }
+                            arrivedEndPosition = true;
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+        if (!arrivedEndPosition) {
+            Point2D AB = nextPosition.subtract(position).normalize();
+            position = new Point2D(position.getX() + distance * AB.getX(),
+                    position.getY() + distance * AB.getY());
+
+        }
     }
 
     @Override
@@ -83,8 +108,16 @@ public class Car implements DynamicGraphicObject {
         this.nextPosition = nextPosition;
     }
 
-    public void release() {
+    public void releaseArrivedEndPosition() {
         this.pret.release();
+    }
+
+    public void acquireArrivedEndPosition() {
+        try {
+            this.pret.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }

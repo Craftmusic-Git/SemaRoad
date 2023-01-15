@@ -31,8 +31,6 @@ public class TrafficLight extends BasicCarProblem {
                     this.sf1.acquire();
                     this.sf2.release();
 
-                    System.out.println("Changement de feu = 1 -> 2");
-
                     EventManager.getEventManager().setLight(LightPosition.HORIZONTAL);
 
                     this.feu = 2;
@@ -42,7 +40,6 @@ public class TrafficLight extends BasicCarProblem {
                     this.sf2.acquire();
                     this.sf1.release();
 
-                    System.out.println("Changement de feu = 2 -> 1");
                     EventManager.getEventManager().setLight(LightPosition.VERTICAL);
                     this.feu = 1;
 

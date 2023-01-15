@@ -23,14 +23,10 @@ public class Car extends BasicCarProblem {
         this.pret = new Semaphore(0);
 
         if (this.position.equals(LanePosition.LEFT)) {
-            BasicCarProblem.left += 1;
-            System.out.println("BasicCarProblem.left = " + BasicCarProblem.left);
             this.sf = sf1;
             this.st = st1;
 
         } else if (this.position.equals(LanePosition.BOTTOM)) {
-            BasicCarProblem.bottom += 1;
-            System.out.println("BasicCarProblem.left = " + BasicCarProblem.bottom);
             this.sf = sf2;
             this.st = st2;
         }
@@ -42,8 +38,7 @@ public class Car extends BasicCarProblem {
         try {
 
             this.pret.acquire();
-
-            System.out.println("Je suis arrivé à destiontion !! ");
+            System.out.println("Je suis arrivé à fin de mon attente !! ");
 
             this.st.acquire();
             this.sf.acquire();
@@ -60,17 +55,5 @@ public class Car extends BasicCarProblem {
     }
 
     private void avance() {
-
-        if (this.position.equals(LanePosition.LEFT)) {
-            BasicCarProblem.left -= 1;
-            // System.out.println("BasicCarProblem.left = " + BasicCarProblem.left);
-        }
-
-        else if (this.position.equals(LanePosition.BOTTOM)) {
-            BasicCarProblem.bottom -= 1;
-            // System.out.println("BasicCarProblem.down = " + BasicCarProblem.bottom);
-
-        }
-
     }
 }

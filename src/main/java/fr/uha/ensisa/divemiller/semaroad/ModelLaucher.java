@@ -12,7 +12,7 @@ public class ModelLaucher implements Runnable {
 
     Semaphore startedModel;
 
-    private final Integer NBRE_CAR = 1;
+    private final Integer NBRE_CAR = 3;
 
     public ModelLaucher(Semaphore startedModel) {
         this.startedModel = startedModel;

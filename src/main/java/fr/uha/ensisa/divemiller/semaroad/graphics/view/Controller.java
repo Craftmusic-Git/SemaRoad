@@ -133,7 +133,7 @@ public class Controller {
                             c.setNextPosition(LeftFinalPos);
                         }
                         case WAITING -> {
-                            c.setNextPosition(LeftWaitingPos.get(leftQueue.size()));
+                            c.setNextPosition(LeftWaitingPos.get(leftQueue.indexOf(c)));
                         }
                     }
                 }

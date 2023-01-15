@@ -33,7 +33,10 @@ public class DynamicObjects extends AnimationTimer implements DynamicGraphicObje
 
         controller.CalcNextPosition();
 
-        controller.getCars().forEach(c -> forward(c, .128 * time));
+        controller.getCars().forEach(c -> {
+            c.forward(.128 * time);
+            c.show(gc);
+        });
     }
 
     @Override
@@ -43,34 +46,4 @@ public class DynamicObjects extends AnimationTimer implements DynamicGraphicObje
     }
 
     // car.forward(.128 * time);
-    private void forward(Car c, Double distance) {
-
-        switch (c.getStatus()) {
-            case WAITING:
-                switch (c.getLane()) {
-                    case LEFT:
-                        if (c.getPosition().getX() < c.getNextPosition().getX()) {
-                            c.forward(distance);
-                        } else {
-                            c.setStatus(CarStatus.MIDDLE);
-                            c.release();
-                        }
-                        break;
-
-                    default:
-                        break;
-                }
-                c.show(gc);
-                break;
-
-            case MIDDLE:
-                break;
-
-            case FORWARD:
-                break;
-            default:
-                break;
-        }
-    }
-
 }
