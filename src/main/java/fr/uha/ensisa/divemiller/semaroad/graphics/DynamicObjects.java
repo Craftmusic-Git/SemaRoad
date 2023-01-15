@@ -26,8 +26,10 @@ public class DynamicObjects extends AnimationTimer implements DynamicGraphicObje
         double time = (l - startTime) / 100000000.0;
 
         EventManager em = EventManager.getEventManager();
-        TrafficLight tr = new TrafficLight(em.getLightPosition());
-        tr.show(gc);
+        TrafficLight tl = new TrafficLight(em.getLightPosition());
+        tl.show(gc);
+
+
     }
 
     @Override
