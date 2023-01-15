@@ -2,6 +2,7 @@ package fr.uha.ensisa.divemiller.semaroad;
 
 import fr.uha.ensisa.divemiller.semaroad.graphics.view.LightPosition;
 import fr.uha.ensisa.divemiller.semaroad.viewmodel.EventManager;
+import fr.uha.ensisa.divemiller.semaroad.model.basicCarProblem.TrafficLight;
 
 import java.util.concurrent.Semaphore;
 
@@ -19,14 +20,11 @@ public class ModelLaucher implements Runnable {
         em.setLight(LightPosition.HORIZONTAL);
 
         startedModel.release();
-        while (true) {
-            try {
-                Thread.sleep(1000L);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            if (em.getLightPosition() == LightPosition.HORIZONTAL) em.setLight(LightPosition.VERTICAL);
-            else em.setLight(LightPosition.HORIZONTAL);
-        }
+        // Feu
+        Semaphore sf1 = new Semaphore(1);
+        Semaphore sf2 = new Semaphore(0);
+
+        TrafficLight feu = new TrafficLight ( sf1, sf2);
+        feu.start();
     }
 }

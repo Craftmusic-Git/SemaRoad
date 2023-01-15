@@ -1,5 +1,6 @@
 package fr.uha.ensisa.divemiller.semaroad.viewmodel;
 
+import fr.uha.ensisa.divemiller.semaroad.graphics.view.LanePosition;
 import fr.uha.ensisa.divemiller.semaroad.graphics.view.LightPosition;
 
 public class EventManager {
@@ -25,5 +26,13 @@ public class EventManager {
 
     public LightPosition getLightPosition() {
         return lightPosition;
+    }
+
+    public void addCar(Integer id, LanePosition position) {
+
+    }
+
+    public void forwardIntersection(Integer id) {
+
     }
 }
