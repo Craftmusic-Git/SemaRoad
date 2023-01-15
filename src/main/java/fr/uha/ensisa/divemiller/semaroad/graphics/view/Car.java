@@ -79,14 +79,14 @@ public class Car implements DynamicGraphicObject {
                         if (position.getX() >= endLeftSquarePositionX) {
                             if (!arrivedEndPosition)
                                 this.releaseTraverse();
-                            arrivedEndPosition = true;
+                            arrivedEndPosition = false;
                         }
                         break;
                     case BOTTOM: 
                         if (position.getY() <= endBottomSquarePositionY) {
                             if (!arrivedEndPosition)
                                 this.releaseTraverse();
-                            arrivedEndPosition = true;
+                            arrivedEndPosition = false;
                         }
                         break;  
                     default:
