@@ -19,11 +19,12 @@ public class Car implements DynamicGraphicObject {
     CarStatus status;
     Point2D nextPosition;
 
-    private Boolean traverse;
+    private Boolean hasCrossed;
 
     private Semaphore pret;
+    private Semaphore traverse;
 
-    public Car(Integer id, LanePosition lane, double angle, long x, long y, Semaphore pret) {
+    public Car(Integer id, LanePosition lane, double angle, long x, long y, Semaphore pret, Semaphore traverse) {
         position = new Point2D(x, y);
         this.lane = lane;
         this.angle = angle;
@@ -33,17 +34,22 @@ public class Car implements DynamicGraphicObject {
         status = CarStatus.WAITING;
 
         this.pret = pret;
-        this.traverse = false;
+        this.traverse = traverse;
+        this.hasCrossed = false;
     }
 
     public void forward(double distance) {
         Boolean arrivedEndPosition = false;
+
+        Integer beginLeftSquarePositionX = 192;
+        Integer endLeftSquarePositionX = 384;
+
         switch (status) {
             case WAITING:
                 switch (lane) {
                     case LEFT:
-                        if (position.getX() > nextPosition.getX()) {
-                            if (nextPosition.getX() == 192) {
+                        if (position.getX() >= nextPosition.getX()) {
+                            if (nextPosition.getX() >= beginLeftSquarePositionX) {
                                 this.releaseArrivedEndPosition();
                             }
                             arrivedEndPosition = true;
@@ -54,9 +60,9 @@ public class Car implements DynamicGraphicObject {
                 }
                 break;
             case MIDDLE:
-                if (position.getX() >= 384) {
+                if (position.getX() >= endLeftSquarePositionX) {
                     if (!arrivedEndPosition)
-                        this.releaseArrivedEndPosition(); // Il faudrait utiliser un autre semaphore ici je pense
+                        this.releaseTraverse();
                     arrivedEndPosition = true;
                 }
                 break;
@@ -117,19 +123,15 @@ public class Car implements DynamicGraphicObject {
         this.pret.release();
     }
 
-    public void acquireArrivedEndPosition() {
-        try {
-            this.pret.acquire();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void releaseTraverse() {
+        this.traverse.release();
     }
 
-    public boolean aTraverse() {
-        return this.traverse;
+    public boolean hasCrossed() {
+        return this.hasCrossed;
     }
 
-    public void setTraverse(boolean traverse) {
-        this.traverse = traverse;
+    public void setCrossed(boolean traverse) {
+        this.hasCrossed = traverse;
     }
 }

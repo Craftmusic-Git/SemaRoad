@@ -35,9 +35,9 @@ public class EventManager {
         return lightPosition;
     }
 
-    public void addCar(Integer id, LanePosition position, Semaphore pret) {
+    public void addCar(Integer id, LanePosition position, Semaphore pret, Semaphore traverse) {
         CarFactory factory = new CarFactory();
-        cars.add(factory.createCar(id, position, pret));
+        cars.add(factory.createCar(id, position, pret, traverse));
     }
 
     public void forwardIntersection(Integer id) {

@@ -39,9 +39,9 @@ public class DynamicObjects extends AnimationTimer implements DynamicGraphicObje
 
         controller.CalcNextPosition();
         controller.getCars().forEach(c -> {
-            if (!c.aTraverse() && c.getStatus().equals(CarStatus.MIDDLE)) {
+            if (!c.hasCrossed() && c.getStatus().equals(CarStatus.MIDDLE)) {
                 controller.traverser(c.getId());
-                c.setTraverse(true);
+                c.setCrossed(true);
             }
             c.forward(vitesse);
             c.show(gc);

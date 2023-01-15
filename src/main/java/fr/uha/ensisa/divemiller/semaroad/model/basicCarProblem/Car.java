@@ -14,6 +14,7 @@ public class Car extends BasicCarProblem {
     private Semaphore sf;
 
     private Semaphore pret;
+    private Semaphore traverse;
 
     public Car(Integer id, LanePosition position, Semaphore sf1, Semaphore sf2, Semaphore st1, Semaphore st2) {
 
@@ -21,6 +22,7 @@ public class Car extends BasicCarProblem {
         this.position = position;
 
         this.pret = new Semaphore(0);
+        this.traverse = new Semaphore(0);
 
         if (this.position.equals(LanePosition.LEFT)) {
             this.sf = sf1;
@@ -30,7 +32,7 @@ public class Car extends BasicCarProblem {
             this.sf = sf2;
             this.st = st2;
         }
-        EventManager.getEventManager().addCar(id, position, pret);
+        EventManager.getEventManager().addCar(id, position, pret, traverse);
     }
 
     @Override
@@ -44,7 +46,6 @@ public class Car extends BasicCarProblem {
             this.sf.acquire();
 
             System.out.println("je passe le feu");
-
             this.avance();
 
             this.sf.release();
@@ -58,9 +59,9 @@ public class Car extends BasicCarProblem {
 
     private void avance() throws InterruptedException {
         EventManager.getEventManager().forwardIntersection(id);
-        System.out.println("j'avance");
 
-        this.pret.acquire();
+        System.out.println("j'avance");
+        this.traverse.acquire();
         System.out.println("arrive");
     }
 }
