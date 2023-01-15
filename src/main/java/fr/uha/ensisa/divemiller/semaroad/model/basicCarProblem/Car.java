@@ -24,11 +24,11 @@ public class Car extends BasicCarProblem {
         this.pret = new Semaphore(0);
         this.traverse = new Semaphore(0);
 
-        if (this.position.equals(LanePosition.LEFT)) {
+        if (this.position.equals(LanePosition.LEFT) || this.position.equals(LanePosition.RIGHT)) {
             this.sf = sf1;
             this.st = st1;
 
-        } else if (this.position.equals(LanePosition.BOTTOM)) {
+        } else if (this.position.equals(LanePosition.BOTTOM) || this.position.equals(LanePosition.TOP)) {
             this.sf = sf2;
             this.st = st2;
         }
@@ -50,9 +50,8 @@ public class Car extends BasicCarProblem {
 
             this.sf.release();
             this.st.release();
-        }
 
-        catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

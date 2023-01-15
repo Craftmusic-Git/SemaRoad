@@ -32,13 +32,19 @@ public class DynamicObjects extends AnimationTimer implements DynamicGraphicObje
         TrafficLight tl = new TrafficLight(em.getLightPosition());
         tl.show(gc);
 
-        if (!this.firstGet) {
-            em.getCars().stream().forEach(c -> controller.addCarInQueue(c));
-            this.firstGet = true;
-        }
+        em.getCars().stream().forEach(c -> {
+            if (!c.getAdded()) {
+                controller.addCarInQueue(c);
+                c.setAdded(true);
+            }
+        });
 
         controller.CalcNextPosition();
         controller.getCars().forEach(c -> {
+            if (c.getPosition().getX() > 1024 || c.getPosition().getX() < -200 || c.getPosition().getY() > 1024 || c.getPosition().getY() < -200) {
+                em.getCars().remove(c);
+                controller.getCars().remove(c);
+            }
             if (!c.hasCrossed() && c.getStatus().equals(CarStatus.MIDDLE)) {
                 controller.traverser(c.getId());
                 c.setCrossed(true);

@@ -5,7 +5,7 @@ import java.util.concurrent.Semaphore;
 
 public class BasicCarProblem extends Thread {
 
-    protected final int WAIT = 3000;
+    protected final int WAIT = 10000;
     Random rand = new Random();
 
     // Feu

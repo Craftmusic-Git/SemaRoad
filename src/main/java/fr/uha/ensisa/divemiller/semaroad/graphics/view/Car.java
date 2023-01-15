@@ -18,6 +18,7 @@ public class Car implements DynamicGraphicObject {
     Image car;
     CarStatus status;
     Point2D nextPosition;
+    Boolean added;
 
     private Boolean hasCrossed;
 
@@ -28,6 +29,7 @@ public class Car implements DynamicGraphicObject {
         position = new Point2D(x, y);
         this.lane = lane;
         this.angle = angle;
+        this.added = false;
 
         this.id = id; // MICHEL !! les IDs c'est IMPORTANT !
         car = new Image("file:src/main/resources/fr/uha/ensisa/divemiller/semaroad/car.png");
@@ -47,10 +49,34 @@ public class Car implements DynamicGraphicObject {
         Integer beginBottomSquarePositionY = 384;
         Integer endBottomSquarePositionY = 190;
 
+        Integer beginRightSquarePositionX = 384;
+        Integer endRightSquarePositionX = 192;
+
+        Integer beginTopSquarePositionY = 190;
+        Integer endTopSquarePositionY = 384;
+
 
         switch (status) {
             case WAITING:
                 switch (lane) {
+                    case TOP:
+                        if (position.getY() >= nextPosition.getY()) {
+                            if (nextPosition.getY() >= beginTopSquarePositionY) {
+                                this.releaseArrivedEndPosition();
+                            }
+                            arrivedEndPosition = true;
+                        }
+                        break;
+
+                    case RIGHT:
+                        if (position.getX() <= nextPosition.getX()) {
+                            if (nextPosition.getX() <= beginRightSquarePositionX) {
+                                this.releaseArrivedEndPosition();
+                            }
+                            arrivedEndPosition = true;
+                        }
+                        break;
+
                     case LEFT:
                         if (position.getX() >= nextPosition.getX()) {
                             if (nextPosition.getX() >= beginLeftSquarePositionX) {
@@ -60,14 +86,14 @@ public class Car implements DynamicGraphicObject {
                         }
                         break;
 
-                    case BOTTOM: 
+                    case BOTTOM:
                         if (position.getY() <= nextPosition.getY()) {
                             if (nextPosition.getY() <= beginBottomSquarePositionY) {
                                 this.releaseArrivedEndPosition();
                             }
                             arrivedEndPosition = true;
                         }
-                        break;  
+                        break;
 
                     default:
                         break;
@@ -75,6 +101,20 @@ public class Car implements DynamicGraphicObject {
                 break;
             case MIDDLE:
                 switch (lane) {
+                    case TOP:
+                        if (position.getY() >= endTopSquarePositionY) {
+                            if (!arrivedEndPosition)
+                                this.releaseTraverse();
+                            arrivedEndPosition = false;
+                        }
+                        break;
+                    case RIGHT:
+                        if (position.getX() <= endRightSquarePositionX) {
+                            if (!arrivedEndPosition)
+                                this.releaseTraverse();
+                            arrivedEndPosition = false;
+                        }
+                        break;
                     case LEFT:
                         if (position.getX() >= endLeftSquarePositionX) {
                             if (!arrivedEndPosition)
@@ -82,13 +122,13 @@ public class Car implements DynamicGraphicObject {
                             arrivedEndPosition = false;
                         }
                         break;
-                    case BOTTOM: 
+                    case BOTTOM:
                         if (position.getY() <= endBottomSquarePositionY) {
                             if (!arrivedEndPosition)
                                 this.releaseTraverse();
                             arrivedEndPosition = false;
                         }
-                        break;  
+                        break;
                     default:
                         break;
                 }
@@ -160,5 +200,13 @@ public class Car implements DynamicGraphicObject {
 
     public void setCrossed(boolean traverse) {
         this.hasCrossed = traverse;
+    }
+
+    public Boolean getAdded() {
+        return added;
+    }
+
+    public void setAdded(Boolean added) {
+        this.added = added;
     }
 }

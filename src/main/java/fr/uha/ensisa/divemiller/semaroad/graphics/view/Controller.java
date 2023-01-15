@@ -26,12 +26,12 @@ public class Controller {
     public Controller() {
         cars = new ArrayList<>();
 
-        TopFinalPos = new Point2D(256, 720);
+        TopFinalPos = new Point2D(256, 728);
         TopWaitingPos = new ArrayList<>();
         for (int i = 0; i < 10; i++)
-            TopWaitingPos.add(new Point2D(256, 256 - i * 64));
+            TopWaitingPos.add(new Point2D(256, 256 - (i+1) * 64));
 
-        RightFinalPos = new Point2D(720, 256);
+        RightFinalPos = new Point2D(-128, 256);
         RightWaitingPos = new ArrayList<>();
         for (int i = 0; i < 10; i++)
             RightWaitingPos.add(new Point2D(384 + i * 64, 256));
@@ -102,7 +102,7 @@ public class Controller {
                             c.setNextPosition(TopFinalPos);
                         }
                         case WAITING -> {
-                            c.setNextPosition(TopWaitingPos.get(topQueue.size()));
+                            c.setNextPosition(TopWaitingPos.get(topQueue.indexOf(c)));
                         }
                     }
                 }
@@ -112,7 +112,7 @@ public class Controller {
                             c.setNextPosition(RightFinalPos);
                         }
                         case WAITING -> {
-                            c.setNextPosition(RightWaitingPos.get(rightQueue.size()));
+                            c.setNextPosition(RightWaitingPos.get(rightQueue.indexOf(c)));
                         }
                     }
                 }
@@ -142,5 +142,9 @@ public class Controller {
 
     public ArrayList<Car> getCars() {
         return cars;
+    }
+
+    public void setCars(ArrayList<Car> cars) {
+        this.cars = cars;
     }
 }
