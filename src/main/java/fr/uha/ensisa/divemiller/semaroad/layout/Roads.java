@@ -33,29 +33,86 @@ public class Roads {
             }
         }
 
+        // Top
         for (double i = 0; i < 4; i++) {
-            for (double j = 0; j < 4; j++) {
-                ImageView imR = new ImageView(road);
-                imR.setX(256);
-                imR.setY(j * 64);
+            ImageView imR = new ImageView(road);
+            imR.setX(256);
+            imR.setY(i * 64);
 
-                ImageView imL = new ImageView(road);
-                imL.setX(320);
-                imL.setY(j * 64);
-                imL.setRotate(180);
+            ImageView imL = new ImageView(road);
+            imL.setX(320);
+            imL.setY(i * 64);
+            imL.setRotate(180);
 
-                grounds.add(imR);
-                grounds.add(imL);
-            }
+            grounds.add(imR);
+            grounds.add(imL);
         }
+        ImageView iCT = new ImageView(roadCorner);
+        iCT.setX(256);
+        iCT.setY(256);
+        grounds.add(iCT);
 
-        for (double i = 0; i < 4; i ++) {
-            ImageView im = new ImageView(roadCorner);
-            im.setX(256 + i%2 * 64);
-            im.setY(256 + (1<i && i<3? 0 : 1) * 64);
-            im.setRotate(i*90);
-            grounds.add(im);
+        // Bottom
+        for (double i = 0; i < 4; i++) {
+            ImageView imR = new ImageView(road);
+            imR.setX(256);
+            imR.setY(i * 64 + 384);
+
+            ImageView imL = new ImageView(road);
+            imL.setX(320);
+            imL.setY(i * 64 + 384);
+            imL.setRotate(180);
+
+            grounds.add(imR);
+            grounds.add(imL);
         }
+        ImageView iCB = new ImageView(roadCorner);
+        iCB.setX(320);
+        iCB.setY(320);
+        iCB.setRotate(180);
+        grounds.add(iCB);
+
+        // Left
+        for (double i = 0; i < 4; i++) {
+            ImageView imR = new ImageView(road);
+            imR.setY(256);
+            imR.setX(i * 64);
+            imR.setRotate(90);
+
+            ImageView imL = new ImageView(road);
+            imL.setY(320);
+            imL.setX(i * 64);
+            imL.setRotate(270);
+
+            grounds.add(imR);
+            grounds.add(imL);
+        }
+        ImageView iCL = new ImageView(roadCorner);
+        iCL.setX(320);
+        iCL.setY(256);
+        iCL.setRotate(90);
+        grounds.add(iCL);
+
+        // Right
+        for (double i = 0; i < 4; i++) {
+            ImageView imR = new ImageView(road);
+            imR.setY(256);
+            imR.setX(i * 64 + 384);
+            imR.setRotate(90);
+
+            ImageView imL = new ImageView(road);
+            imL.setY(320);
+            imL.setX(i * 64 + 384);
+            imL.setRotate(270);
+
+            grounds.add(imR);
+            grounds.add(imL);
+        }
+        ImageView iCR = new ImageView(roadCorner);
+        iCR.setX(256);
+        iCR.setY(320);
+        iCR.setRotate(270);
+        grounds.add(iCR);
 
         Group rep = new Group();
         rep.getChildren().addAll(grounds);
