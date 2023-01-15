@@ -19,6 +19,10 @@ public class EventManager {
     }
 
     public void setLight(LightPosition lightPosition) {
+        this.lightPosition = lightPosition;
+    }
 
+    public LightPosition getLightPosition() {
+        return lightPosition;
     }
 }
