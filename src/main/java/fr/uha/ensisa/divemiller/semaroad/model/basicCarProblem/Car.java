@@ -3,6 +3,7 @@ package fr.uha.ensisa.divemiller.semaroad.model.basicCarProblem;
 import java.util.concurrent.Semaphore;
 
 import fr.uha.ensisa.divemiller.semaroad.graphics.view.LanePosition;
+import fr.uha.ensisa.divemiller.semaroad.viewmodel.EventManager;
 
 public class Car extends BasicCarProblem {
 
@@ -30,6 +31,7 @@ public class Car extends BasicCarProblem {
             this.st = st2;
         }
 
+        EventManager.getEventManager().addCar(id, position);
     }
 
     @Override

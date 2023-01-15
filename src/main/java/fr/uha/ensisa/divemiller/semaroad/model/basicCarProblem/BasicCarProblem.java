@@ -5,7 +5,7 @@ import java.util.concurrent.Semaphore;
 
 public class BasicCarProblem extends Thread {
 
-    protected final int WAIT = 1000;
+    protected final int WAIT = 5000;
     protected static Integer left = 0;
     protected static Integer bottom = 0;
 

@@ -1,7 +1,12 @@
 package fr.uha.ensisa.divemiller.semaroad.viewmodel;
 
+import fr.uha.ensisa.divemiller.semaroad.graphics.view.Car;
+import fr.uha.ensisa.divemiller.semaroad.graphics.view.CarStatus;
 import fr.uha.ensisa.divemiller.semaroad.graphics.view.LanePosition;
 import fr.uha.ensisa.divemiller.semaroad.graphics.view.LightPosition;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EventManager {
 
@@ -9,8 +14,10 @@ public class EventManager {
 
     private LightPosition lightPosition;
 
-    private EventManager() {
+    private ArrayList<Car> cars;
 
+    private EventManager() {
+        cars = new ArrayList<>();
     }
 
     public static EventManager getEventManager() {
@@ -29,10 +36,19 @@ public class EventManager {
     }
 
     public void addCar(Integer id, LanePosition position) {
-
+        CarFactory factory = new CarFactory();
+        cars.add(factory.createCar(id, position));
     }
 
     public void forwardIntersection(Integer id) {
+        cars.stream().filter(car -> car.getId().equals(id)).findFirst().get().setStatus(CarStatus.MIDDLE);
+    }
 
+    public ArrayList<Car> getCars() {
+        return cars;
+    }
+
+    public void resetEmCars() {
+        cars = new ArrayList<>();
     }
 }
