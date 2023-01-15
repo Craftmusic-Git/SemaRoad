@@ -33,6 +33,7 @@ public class Car implements DynamicGraphicObject {
         this.lane = lane;
         this.angle = angle;
         this.pret = pret;
+        this.id = id; // MICHEL !! les IDs c'est IMPORTANT !
         car = new Image("file:src/main/resources/fr/uha/ensisa/divemiller/semaroad/car.png");
         status = CarStatus.WAITING;
     }
@@ -53,6 +54,8 @@ public class Car implements DynamicGraphicObject {
                         break;
                 }
                 break;
+            case MIDDLE:
+                System.out.println("MIDDLE");
             default:
                 break;
         }

@@ -55,5 +55,6 @@ public class Car extends BasicCarProblem {
     }
 
     private void avance() {
+        EventManager.getEventManager().forwardIntersection(id);
     }
 }

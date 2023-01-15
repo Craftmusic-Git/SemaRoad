@@ -4,7 +4,6 @@ import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Queue;
 
 public class Controller {
     ArrayList<Car> cars;

@@ -11,11 +11,13 @@ public class DynamicObjects extends AnimationTimer implements DynamicGraphicObje
     GraphicsContext gc;
     long startTime;
     Controller controller;
+    Boolean firstGet;
 
     public DynamicObjects(GraphicsContext gc) {
         this.gc = gc;
         startTime = System.nanoTime();
         controller = new Controller();
+        this.firstGet = false;
     }
 
     @Override
@@ -28,11 +30,12 @@ public class DynamicObjects extends AnimationTimer implements DynamicGraphicObje
         TrafficLight tl = new TrafficLight(em.getLightPosition());
         tl.show(gc);
 
-        em.getCars().stream().forEach(c -> controller.addCarInQueue(c));
-        em.resetEmCars();
+        if (!this.firstGet) {
+            em.getCars().stream().forEach(c -> controller.addCarInQueue(c));
+            this.firstGet = true;
+        }
 
         controller.CalcNextPosition();
-
         controller.getCars().forEach(c -> {
             c.forward(.128 * time);
             c.show(gc);
