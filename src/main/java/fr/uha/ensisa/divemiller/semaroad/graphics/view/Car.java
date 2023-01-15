@@ -45,7 +45,7 @@ public class Car implements DynamicGraphicObject {
         Integer endLeftSquarePositionX = 384;
 
         Integer beginBottomSquarePositionY = 384;
-        Integer endBottomSquarePositionY = 256;
+        Integer endBottomSquarePositionY = 190;
 
 
         switch (status) {

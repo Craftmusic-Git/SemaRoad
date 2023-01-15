@@ -36,7 +36,7 @@ public class Controller {
         for (int i = 0; i < 10; i++)
             RightWaitingPos.add(new Point2D(384 + i * 64, 256));
 
-        BottomFinalPos = new Point2D(320, -64);
+        BottomFinalPos = new Point2D(320, -128);
         BottomWaitingPos = new ArrayList<>();
         for (int i = 0; i < 10; i++)
             BottomWaitingPos.add(new Point2D(320, 384 + i * 64));
@@ -122,7 +122,7 @@ public class Controller {
                             c.setNextPosition(BottomFinalPos);
                         }
                         case WAITING -> {
-                            c.setNextPosition(BottomWaitingPos.get(bottomQueue.size()));
+                            c.setNextPosition(BottomWaitingPos.get(bottomQueue.indexOf(c)));
                         }
                     }
                 }
