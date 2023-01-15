@@ -7,6 +7,8 @@ import javafx.scene.image.Image;
 
 import static fr.uha.ensisa.divemiller.semaroad.graphics.core.GraphicUtils.drawRotatedImage;
 
+import java.util.concurrent.Semaphore;
+
 public class Car implements DynamicGraphicObject {
 
     Integer id;
@@ -17,6 +19,8 @@ public class Car implements DynamicGraphicObject {
     CarStatus status;
     Point2D nextPosition;
 
+    private Semaphore pret;
+
     public Car(Integer id, LanePosition lane) {
         position = new Point2D(256, 256);
         this.lane = lane;
@@ -24,10 +28,11 @@ public class Car implements DynamicGraphicObject {
         status = CarStatus.WAITING;
     }
 
-    public Car(Integer id, LanePosition lane, double angle, long x, long y) {
+    public Car(Integer id, LanePosition lane, double angle, long x, long y, Semaphore pret) {
         position = new Point2D(x, y);
         this.lane = lane;
         this.angle = angle;
+        this.pret = pret;
         car = new Image("file:src/main/resources/fr/uha/ensisa/divemiller/semaroad/car.png");
         status = CarStatus.WAITING;
     }
@@ -77,4 +82,9 @@ public class Car implements DynamicGraphicObject {
     public void setNextPosition(Point2D nextPosition) {
         this.nextPosition = nextPosition;
     }
+
+    public void release() {
+        this.pret.release();
+    }
+
 }

@@ -6,6 +6,7 @@ import fr.uha.ensisa.divemiller.semaroad.graphics.view.LanePosition;
 import fr.uha.ensisa.divemiller.semaroad.graphics.view.LightPosition;
 
 import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
 
 public class EventManager {
 
@@ -34,9 +35,9 @@ public class EventManager {
         return lightPosition;
     }
 
-    public void addCar(Integer id, LanePosition position) {
+    public void addCar(Integer id, LanePosition position, Semaphore pret) {
         CarFactory factory = new CarFactory();
-        cars.add(factory.createCar(id, position));
+        cars.add(factory.createCar(id, position, pret));
     }
 
     public void forwardIntersection(Integer id) {

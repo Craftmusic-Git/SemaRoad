@@ -51,8 +51,10 @@ public class DynamicObjects extends AnimationTimer implements DynamicGraphicObje
                     case LEFT:
                         if (c.getPosition().getX() < c.getNextPosition().getX()) {
                             c.forward(distance);
-                        } else
+                        } else {
                             c.setStatus(CarStatus.MIDDLE);
+                            c.release();
+                        }
                         break;
 
                     default:

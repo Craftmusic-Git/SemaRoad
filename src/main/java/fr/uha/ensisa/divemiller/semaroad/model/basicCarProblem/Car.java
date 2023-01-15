@@ -13,10 +13,14 @@ public class Car extends BasicCarProblem {
     private Semaphore st;
     private Semaphore sf;
 
+    private Semaphore pret;
+
     public Car(Integer id, LanePosition position, Semaphore sf1, Semaphore sf2, Semaphore st1, Semaphore st2) {
 
         this.id = id;
         this.position = position;
+
+        this.pret = new Semaphore(0);
 
         if (this.position.equals(LanePosition.LEFT)) {
             BasicCarProblem.left += 1;
@@ -30,12 +34,16 @@ public class Car extends BasicCarProblem {
             this.sf = sf2;
             this.st = st2;
         }
-        EventManager.getEventManager().addCar(id, position);
+        EventManager.getEventManager().addCar(id, position, pret);
     }
 
     @Override
     public void run() {
         try {
+
+            this.pret.acquire();
+
+            System.out.println("Je suis arrivé à destiontion !! ");
 
             this.st.acquire();
             this.sf.acquire();
