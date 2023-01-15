@@ -41,7 +41,7 @@ public class ModelLaucher implements Runnable {
             car.start();
         }
 
-        for (int i = 0; i < 0; i++) {
+        for (int i = 0; i < NBRE_CAR; i++) {
             Car car = new Car(i + 5, LanePosition.BOTTOM, sf1, sf2, st1, st2);
             car.start();
         }

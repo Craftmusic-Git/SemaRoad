@@ -44,6 +44,10 @@ public class Car implements DynamicGraphicObject {
         Integer beginLeftSquarePositionX = 192;
         Integer endLeftSquarePositionX = 384;
 
+        Integer beginBottomSquarePositionY = 384;
+        Integer endBottomSquarePositionY = 256;
+
+
         switch (status) {
             case WAITING:
                 switch (lane) {
@@ -55,18 +59,41 @@ public class Car implements DynamicGraphicObject {
                             arrivedEndPosition = true;
                         }
                         break;
+
+                    case BOTTOM: 
+                        if (position.getY() <= nextPosition.getY()) {
+                            if (nextPosition.getY() <= beginBottomSquarePositionY) {
+                                this.releaseArrivedEndPosition();
+                            }
+                            arrivedEndPosition = true;
+                        }
+                        break;  
+
                     default:
                         break;
                 }
                 break;
             case MIDDLE:
-                if (position.getX() >= endLeftSquarePositionX) {
-                    if (!arrivedEndPosition)
-                        this.releaseTraverse();
-                    arrivedEndPosition = true;
+                switch (lane) {
+                    case LEFT:
+                        if (position.getX() >= endLeftSquarePositionX) {
+                            if (!arrivedEndPosition)
+                                this.releaseTraverse();
+                            arrivedEndPosition = true;
+                        }
+                        break;
+                    case BOTTOM: 
+                        if (position.getY() <= endBottomSquarePositionY) {
+                            if (!arrivedEndPosition)
+                                this.releaseTraverse();
+                            arrivedEndPosition = true;
+                        }
+                        break;  
+                    default:
+                        break;
                 }
-                break;
 
+                break;
             default:
                 break;
         }

@@ -28,22 +28,22 @@ public class Controller {
 
         TopFinalPos = new Point2D(256, 720);
         TopWaitingPos = new ArrayList<>();
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 10; i++)
             TopWaitingPos.add(new Point2D(256, 256 - i * 64));
 
         RightFinalPos = new Point2D(720, 256);
         RightWaitingPos = new ArrayList<>();
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 10; i++)
             RightWaitingPos.add(new Point2D(384 + i * 64, 256));
 
         BottomFinalPos = new Point2D(320, -64);
         BottomWaitingPos = new ArrayList<>();
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 10; i++)
             BottomWaitingPos.add(new Point2D(320, 384 + i * 64));
 
         LeftFinalPos = new Point2D(720, 320);
         LeftWaitingPos = new ArrayList<>();
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 10; i++)
             LeftWaitingPos.add(new Point2D(256 - (i + 1) * 64, 320));
 
         topQueue = new LinkedList<>();
